@@ -1,0 +1,55 @@
+Migrating websites between servers
+Usually WP sites.
+
+
+Check wp-config for user,pass
+
+Make sql dump
+
+mysqldump -u root -p moyameaker > moyameaker20160916.sql
+
+Zip it all
+tar -zcvf moyameaker20160916.tar.gz www.moyameaker.com/
+
+Scp to SERVER
+
+scp -p 6661 moyameaker20160916.tar.gz liam@SERVERIP:~
+
+
+on SERVER
+
+Make username on it
+
+vipw - copy last one
+
+mkdir bridgehouse
+
+chown -R bridghouse:ftp directory
+
+Extract tar
+tar -xzvf moyamekaer12515.tar.gz
+
+New database
+
+create database sabawp
+create user saba@localhost identified by ‘pass’
+grant all privileges on sabawp.* to saba@localhost
+flush privileges
+
+
+mysql -u root -p saba_wp < dump
+
+mv * ../
+
+
+do nginx virtual hosts config
+
+
+add new IP to local hosts file to test.
+
+
+IF PERMISSIONS GOES TO SHIT 
+chmod -R a+r www.revel8.global/ 
+
+
+If all works, change RR records in DNS.
